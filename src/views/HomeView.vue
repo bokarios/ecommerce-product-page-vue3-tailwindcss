@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import HeroSection from '@/components/HeroSection.vue'
-import TopClassesSection from '@/components/TopClassesSection.vue'
+import HeaderComponent from '@/components/HeaderComponent.vue'
+import ProductComponent from '@/components/ProductComponent.vue'
 </script>
 
 <template>
-  <HeroSection />
-  <TopClassesSection />
+  <HeaderComponent />
+  <ProductComponent />
 </template>
