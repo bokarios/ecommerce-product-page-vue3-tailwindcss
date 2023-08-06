@@ -4,8 +4,10 @@ import CartModalComponent from './CartModalComponent.vue'
 import CartIcon from './icons/CartIcon.vue'
 import { useCartStore } from '@/stores/cart'
 import MenuIcon from './icons/MenuIcon.vue'
+import MobileMenuComponent from './MobileMenuComponent.vue'
 
 const showCart = ref(false)
+const showMenu = ref(false)
 
 let links = [
   {
@@ -32,12 +34,19 @@ let links = [
 </script>
 
 <template>
+  <MobileMenuComponent
+    :show-menu="showMenu"
+    @close-menu="() => (showMenu = false)"
+  />
   <header class="px-0 lg:px-20 xl:px-36 max-w-[1440px] mx-auto">
     <div
       class="flex justify-between items-center h-16 md:h-20 lg:h-28 px-5 md:px-10 lg:px-0"
     >
       <div class="flex items-center h-full">
-        <button class="lg:hidden pt-1 mr-4 text-gray-500">
+        <button
+          class="lg:hidden pt-1 mr-4 text-gray-500"
+          @click="() => (showMenu = true)"
+        >
           <MenuIcon />
         </button>
         <img src="/images/logo.svg" class="mr-16" alt="logo" />
@@ -52,8 +61,11 @@ let links = [
         </div>
       </div>
       <div class="flex items-center gap-5 lg:gap-12">
+        <CartModalComponent
+          :show-modal="showCart"
+          @close-modal="() => (showCart = false)"
+        />
         <button class="relative" @click="() => (showCart = !showCart)">
-          <CartModalComponent :show-modal="showCart" />
           <div
             v-if="useCartStore().cart.length > 0"
             class="absolute -top-2 left-2 px-2 rounded-xl bg-brand-orange text-white text-[10px] font-bold"
